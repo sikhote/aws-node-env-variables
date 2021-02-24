@@ -5,6 +5,7 @@ jobs:
   deploy:
     docker:
       - image: circleci/node:12
+    working_directory: ~/repo
     parameters:
       stage:
         type: string
