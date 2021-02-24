@@ -9,7 +9,7 @@ provider:
 functions:
   test:
     handler: handler.test
-    environment: ${file(env.yml):${opt:stage, self:provider.stage}}
+    environment: ${file(./env.yml):${opt:stage, self:provider.stage}}
 
 package:
   exclude:
