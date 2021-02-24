@@ -5,7 +5,7 @@ module.exports.test = (event, context, callback) => {
 
   const response = {
     statusCode: 200,
-    body: JSON.stringify({}),
+    body: JSON.stringify({name: process.env.COMPANY_NAME}),
   };
 
   callback(null, response);
