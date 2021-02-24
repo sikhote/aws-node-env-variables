@@ -25,7 +25,7 @@ jobs:
             - ./node_modules
           key: dependencies-cache-{{ checksum "yarn.lock" }}
       - aws-cli/setup
-      - run: sls deploy -c serverless.yml --stage=<< parameters.stage >>
+      - run: sls deploy -c serverless.yml --stage << parameters.stage >>
 workflows:
   pn-deploy:
     jobs:
