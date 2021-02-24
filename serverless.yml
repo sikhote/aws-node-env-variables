@@ -14,7 +14,6 @@ provider:
 functions:
   test:
     handler: handler.test
-    environment: ${file(env.yml):${self:provider.stage}}
 
 package:
   exclude:
