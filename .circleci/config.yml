@@ -33,8 +33,6 @@ workflows:
       - deploy:
           name: deploy_dev
           stage: dev
-          context: build
       - deploy:
           name: deploy_prod
           stage: prod
-          context: build
