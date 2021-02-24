@@ -4,12 +4,17 @@ frameworkVersion: ">=1.2.0 <3.0.0"
 
 provider:
   name: aws
+  versionFunctions: false
   runtime: nodejs12.x
+  profile: default
+  stage: ${opt:stage, 'un-dev'}
+  environment: ${file(env.yml):${self:provider.stage}}
+  region: us-east-1
 
 functions:
   test:
     handler: handler.test
-    environment: ${file(env.yml):${opt:stage, self:provider.stage}}
+    environment: ${file(env.yml):${self:provider.stage}}
 
 package:
   exclude:
