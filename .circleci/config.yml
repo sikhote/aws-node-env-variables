@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@1.2.1
-  serverless: circleci/serverless-framework@1.0.1
 jobs:
   deploy:
     docker:
@@ -12,6 +11,10 @@ jobs:
         type: string
     steps:
       - checkout
+      - run:
+          name: Install Serverless CLI and dependencies
+          command: |
+            sudo npm i -g serverless@2.25.2
       - restore_cache:
           keys:
             - dependencies-cache-{{ checksum "yarn.lock" }}
@@ -22,14 +25,13 @@ jobs:
             - ./node_modules
           key: dependencies-cache-{{ checksum "yarn.lock" }}
       - aws-cli/setup
-      - serverless/setup
-      - run: sls deploy -c serverless.yml --stage << parameters.stage >>
+      - run: sls deploy -c serverless.yml -s << parameters.stage >>
 workflows:
   pn-deploy:
     jobs:
       - deploy:
           name: deploy_dev
-          stage: un-dev
+          stage: dev
       - deploy:
           name: deploy_prod
-          stage: un-prod
+          stage: prod
